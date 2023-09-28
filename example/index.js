@@ -1,4 +1,4 @@
-const SeoAnalyzer = require('../dist/seo-analyzer.js');
+const SeoTester = require('../dist/seo-tester.js');
 
 // --------- Custom rules ------------ //
 function customRule(dom) {
@@ -13,7 +13,7 @@ function customRule(dom) {
 }
 // -------------------------------- //
 
-new SeoAnalyzer()
+new SeoTester()
   // ------- Ignore methods ------- //
   // .ignoreFolders(['example/html/contact'])
   // .ignoreFiles(['example/html/team.html'])

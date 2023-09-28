@@ -41,14 +41,14 @@ class SeoAnalyzer {
   // ------- Input methods ------- //
   inputFiles(files) {
     if (this._inputData.length !== 0) return this;
-    this._logger.printTextToConsole('SEO Analyzer');
+    this._logger.printTextToConsole('SEO Tester');
     this._inputData = this._input.files(files, this._ignoreFiles);
     return this;
   }
 
   inputFolders(folders) {
     if (this._inputData.length !== 0) return this;
-    this._logger.printTextToConsole('SEO Analyzer');
+    this._logger.printTextToConsole('SEO Tester');
     this._inputData = this._input.folders(
       folders,
       this._ignoreFolders,
@@ -59,16 +59,23 @@ class SeoAnalyzer {
 
   inputSpaFolder(folder, sitemap='sitemap.xml', port = 9999) {
     if (!this._inputData) return this;
-    this._logger.printTextToConsole('SEO Analyzer');
+    this._logger.printTextToConsole('SEO Tester');
     // Run server for spa
     startServer(folder, port);
     this._inputData = this._input.spa(port, this._ignoreUrls, sitemap);
     return this;
   }
+  
+  inputSitemap(sitemap) {
+    if (!this._inputData) return this;
+    this._logger.printTextToConsole('SEO Tester');
+    this._inputData = this._input.sitemap(sitemap, this._ignoreUrls);
+    return this;
+  }
 
   inputNextJs(sitemap='sitemap.xml', port = 3000) {
     if (!this._inputData) return this;
-    this._logger.printTextToConsole('SEO Analyzer');
+    this._logger.printTextToConsole('SEO Tester');
     this._inputData = this._nextServer.inputSSR(port, this._ignoreUrls, sitemap);
     return this;
   }
@@ -113,6 +120,15 @@ class SeoAnalyzer {
     })();
     return this;
   }
+
+  outputCsv(callback, reportPath) {
+    (async () => {
+      const report = await this._output.csv(await this._inputData, this._rules, reportPath);
+      callback(report);
+    })();
+    return this;
+  }
+
 }
 
 export default SeoAnalyzer;

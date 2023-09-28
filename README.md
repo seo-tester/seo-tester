@@ -1,4 +1,4 @@
-# SEO analyzer — library for searching SEO issues
+# SEO Tester — library for searching SEO issues
 
 [![Developed by Mad Devs](https://maddevs.io/badge-dark.svg)](https://maddevs.io?utm_source=github&utm_medium=madboiler)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -19,9 +19,9 @@ The library for analyze a HTML files to show all of the SEO defects.
 * Easy setup.
 * Adding custom rules.
 * 6 ready-made rules.
-* Running the seo-analyzer for Next.js SSR applications.
-* Running the seo-analyzer for SPA applications.
-* Running the seo-analyzer in pipelines(github, gitlab, ...) or pre-push or anywhere else.
+* Running the seo-tester for Next.js SSR applications.
+* Running the seo-tester for SPA applications.
+* Running the seo-tester in pipelines(github, gitlab, ...) or pre-push or anywhere else.
 * Multiple options for outputting the result.
 
 ## Why you should use Seo Analyzer
@@ -35,7 +35,7 @@ The library for analyze a HTML files to show all of the SEO defects.
 Install with npm
 
 ```sh
-npm install -D seo-analyzer
+npm install -D @seo-tester/seo-tester
 ```
 
 ## Usage
@@ -45,9 +45,9 @@ npm install -D seo-analyzer
 Setting up the SEO analyzer is as simple as possible. It will look something like this:
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .inputFiles(<array>)
   .addRule(<function>)
   .addRule(<function>)
@@ -59,9 +59,9 @@ Next I will show you some examples.
 #### One way: file analysis for SPA application and log report to console
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .ignoreUrls(['/404', '/login'])
   .inputSpaFolder('/dist', 'sitemapindex.xml', 3000)
   .addRule('imgTagWithAltAttributeRule')
@@ -71,9 +71,9 @@ new SeoAnalyzer()
 #### Two way: read a list HTML files and log report to console
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .inputFiles(['index.html', 'about.html'])
   .addRule('imgTagWithAltAttributeRule')
   .outputConsole();
@@ -82,9 +82,9 @@ new SeoAnalyzer()
 #### Three way: read a folders with HTML files and log report to console
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .inputFolders(['dist', 'src'])
   .addRule('imgTagWithAltAttributeRule')
   .outputConsole();
@@ -93,9 +93,9 @@ new SeoAnalyzer()
 #### Fourth way: read a folders with HTML files and return json
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .inputFolders(['dist', 'src'])
   .addRule('imgTagWithAltAttributeRule')
   .outputJson(json => console.log(json));
@@ -104,9 +104,9 @@ new SeoAnalyzer()
 #### Fifth way: ignore subfolder "test" and 404.html in folder "src" and return js object
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .ignoreFolders(['src/test'])
   .ignoreFiles(['src/404.html'])
   .inputFolders(['dist', 'src'])
@@ -117,9 +117,9 @@ new SeoAnalyzer()
 #### Sixth way: file analysis for Next.js SSR application and log report to console
 
 ```js
-const SeoAnalyzer = require('seo-analyzer');
+const SeoTester = require('@seo-tester/seo-tester');
 
-new SeoAnalyzer()
+new SeoTester()
   .inputNextJs(3000)
   .addRule('imgTagWithAltAttributeRule')
   .outputConsole();
@@ -245,7 +245,7 @@ One new rule was created and three obsolete rules were deleted.
 
 | ✅ | ❌ | Rule | Description |
 | :---: | :---: | :--- | :--- |
-| ✅  |  | inputNextJs | Running the seo-analyzer for Next.js SSR applications |
+| ✅  |  | inputNextJs | Running the seo-tester for Next.js SSR applications |
 |    |❌ | hTagsRule | Only for HTML4 |
 |    |❌ | noMoreThanOneH1TagRule | Only for HTML4 |
 |    |❌ | noTooManyStrongTagsRule | Only for HTML4 |

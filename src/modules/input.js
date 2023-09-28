@@ -93,6 +93,20 @@ class Input {
     return htmlDoms;
   }
 
+  
+  /**
+   * Get the DOM from urls
+   * @returns {Promise.Array} [{ window: {}, document: {}, ... }, { window: {}, document: {}, ... }, ...]
+   * @param sitemap url
+   * @param ignoreUrls
+   */
+   async sitemap(sitemap, ignoreUrls = []) {
+    const listTexts = await this.scraper.run(undefined, ignoreUrls, sitemap, true);
+    const htmlDoms = await this._getDom(listTexts);
+    return htmlDoms;
+  }
+
+
   /**
    * Get all files from folders
    * @param {Array} folders [<string>, <string>, ...]

@@ -25,12 +25,23 @@ class Scanner {
    * @returns {Array} - Array of html doms
    * @description - Scrapes the site and returns the html doms
    */
-  async run(port, urls, sitemap) {
-    this.inputUrl = `http://localhost:${port}`;
+  async run(port, urls, sitemap, sitemapOnly) {
+    if (sitemapOnly === true) {
+      const url = new URL(sitemap);
+      this.inputUrl = url.origin;
+      sitemap = this._normalizeSrc(url.pathname);
+    } else {
+      this.inputUrl = `http://localhost:${port}`;
+    }
+
     this.ignoreUrls = urls;
     const links = await this._getLinksFromSitemap(sitemap);
     const htmlDoms = await this._getHtmlDomFromLinks(links);
     return htmlDoms;
+  }
+
+  _normalizeSrc(src) {
+    return src[0] === '/' ? src.slice(1) : src;
   }
 
   /**
@@ -39,9 +50,9 @@ class Scanner {
    * @description - Scrapes the sitemap and returns the links
    */
   _getLinksFromSitemap(sitemap) {
-    this.logger.info(`🚀  Get sitemap from ${this.inputUrl}\n`);
+    const formattedUrl = `${this.inputUrl}/${sitemap}`;
+    this.logger.info(`🚀  Get sitemap from ${formattedUrl}\n`);
     return new Promise(resolve => {
-      const formattedUrl = `${this.inputUrl}/${sitemap}`;
       const links = [];
       sitemaps.parseSitemaps(
         formattedUrl,
@@ -104,7 +115,9 @@ class Scanner {
     for (const link of links) {
       promises.push(
         axios
-          .get(link)
+          .get(link, {
+            headers: { 'User-Agent':  process.env.USER_AGENT || 'Axios 1.5.1' }
+          })
           .then(res => {
             if (res && res.status === 200) {
               htmlDoms.push({ source: link, text: res.data });
