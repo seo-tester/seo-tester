@@ -36,16 +36,18 @@ class Output {
   async csv(inputData, rules, reportPath) {
     const report = await this.analyzer.run(inputData, rules);
     report.map(
-      v => {
+      link => {
         let value = {};
-        v.report.forEach(
-          (item, index) => {value['issue_' + index] = item;}
+        link.report.forEach(
+          (issue, index) => {
+            value['issue_' + (index + 1)] = issue;
+          }
         );
-        v.report = value;
-        return v;
+        link.report = value;
+        return link;
       }
     );
-    const content = await json2csv(report, {excludeKeys: null});
+    const content = await json2csv(report, {emptyFieldValue: "", preventCsvInjection: true});
     
     if (reportPath === undefined) {
       reportPath = path.join(__dirname,  'report.csv');

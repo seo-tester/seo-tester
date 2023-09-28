@@ -3,12 +3,12 @@ const path = require('path');
 
 // --------- Custom rules ------------ //
 function onlySingleH1(dom) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const h1 = dom.window.document.querySelectorAll('h1');
     if (h1 && h1.length > 1) {
-      reject(new Error('Multple <h1> tags found.'));
+      resolve('Multple <h1> tags found.');
     } else {
-      resolve('');
+      resolve('')
     }
   });
 }

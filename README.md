@@ -1,13 +1,12 @@
 # SEO Tester — library for searching SEO issues
 
 [![Developed by Mad Devs](https://maddevs.io/badge-dark.svg)](https://maddevs.io?utm_source=github&utm_medium=madboiler)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![npm](https://img.shields.io/npm/dt/%40seo-tester/seo-tester)
+
 
 ![Preview](preview.jpg)
 
 The library for analyze a HTML files to show all of the SEO defects.
-
-**Link to article** https://maddevs.io/insights/blog/seo-analyzer/
 
 ## Translations of documentation
 
@@ -21,6 +20,7 @@ The library for analyze a HTML files to show all of the SEO defects.
 * 6 ready-made rules.
 * Running the seo-tester for Next.js SSR applications.
 * Running the seo-tester for SPA applications.
+* Running the seo-tester with sitemap url.
 * Running the seo-tester in pipelines(github, gitlab, ...) or pre-push or anywhere else.
 * Multiple options for outputting the result.
 
